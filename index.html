@@ -1,450 +1,270 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#171519">
-  <meta name="description" content="Personal portfolio and projects.">
-  <title>Name</title>
-
-  <style>
-    :root {
-      --bg: #171519;
-      --surface: #201d22;
-      --surface-raised: #28232a;
-      --plum: #493744;
-      --accent: #c7a2bd;
-      --text: #eee8ed;
-      --muted: #b2a5b2;
-      --border: #3b333d;
-      --radius: 16px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 90px;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: Inter, "Segoe UI", sans-serif;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    a:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 5px;
-    }
-
-    .container {
-      width: min(1000px, calc(100% - 40px));
-      margin: auto;
-    }
-
-    /* Navigation */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(23, 21, 25, 0.92);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    nav {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .logo {
-      font-size: 14px;
-      font-weight: 750;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .logo span {
-      color: var(--accent);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .nav-links a {
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    .nav-links .contact-link {
-      color: var(--text);
-      padding: 7px 14px;
-      border: 1px solid var(--border);
-      border-radius: 30px;
-    }
-
-    /* Hero */
-
-    .hero {
-      min-height: 560px;
-      padding-top: 110px;
-      padding-bottom: 65px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-    }
-
-    .eyebrow {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    h1 {
-      font-size: clamp(44px, 8vw, 78px);
-      line-height: 1.08;
-      letter-spacing: -0.055em;
-      font-weight: 650;
-      margin: 24px 0;
-    }
-
-    h1 span {
-      color: var(--accent);
-    }
-
-    .hero-description {
-      max-width: 560px;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 30px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 11px 17px;
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 650;
-      transition: transform 0.2s, background 0.2s;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
-    .button-primary {
-      background: #e8d8e5;
-      color: #2a2029;
-      border-color: #e8d8e5;
-    }
-
-    .button-secondary {
-      color: var(--text);
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 85px;
-      padding-top: 18px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    /* Shared sections */
-
-    section.content-section {
-      padding: 80px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .section-label {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 10px;
-      font-weight: 750;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      font-size: clamp(28px, 5vw, 38px);
-      line-height: 1.2;
-      letter-spacing: -0.045em;
-      font-weight: 650;
-    }
-
-    .section-description {
-      color: var(--muted);
-      font-size: 13px;
-      max-width: 430px;
-      margin-top: 12px;
-    }
-
-    .section-heading {
-      margin-bottom: 32px;
-    }
-
-    /* About */
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.3fr 0.7fr;
-      gap: 48px;
-      margin-top: 32px;
-    }
-
-    .about-text {
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.95;
-    }
-
-    .about-text strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .details-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .detail {
-      padding: 15px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-
-    .detail-label {
-      color: var(--muted);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 6px;
-    }
-
-    .detail-value {
-      font-size: 12px;
-      font-weight: 600;
-      overflow-wrap: anywhere;
-    }
-
-    /* Projects */
-
-    .projects-section {
-      background: var(--surface);
-    }
-
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .project-card {
-      min-width: 0;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--bg);
-      transition: border-color 0.2s, transform 0.2s;
-    }
-
-    .project-card:hover {
-      border-color: #80647a;
-      transform: translateY(-3px);
-    }
-
-    .project-preview {
-      height: 165px;
-      padding: 22px;
-      background: #302630;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-number {
-      position: absolute;
-      top: 13px;
-      right: 15px;
-      color: #c7a2bd;
-      font-size: 10px;
-      letter-spacing: 0.12em;
-    }
-
-    .mock-window {
-      width: 85%;
-      max-width: 300px;
-      padding: 13px;
-      border: 1px solid #685366;
-      border-radius: 8px;
-      background: #211d24;
-      transform: rotate(-2deg);
-    }
-
-    .mock-top {
-      display: flex;
-      gap: 5px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #493744;
-    }
-
-    .mock-top i {
-      width: 6px;
-      height: 6px;
-      background: #a889a2;
-      border-radius: 50%;
-    }
-
-    .mock-lines {
-      display: grid;
-      gap: 7px;
-      padding-top: 13px;
-    }
-
-    .mock-lines span {
-      height: 5px;
-      display: block;
-      background: #493744;
-      border-radius: 4px;
-    }
-
-    .mock-lines span:first-child {
-      width: 45%;
-      background: #c7a2bd;
-    }
-
-    .mock-lines span:nth-child(2) {
-      width: 85%;
-    }
-
-    .mock-lines span:nth-child(3) {
-      width: 65%;
-    }
-
-    .mock-blocks {
-      display: flex;
-      gap: 7px;
-      margin-top: 12px;
-    }
-
-    .mock-blocks i {
-      height: 30px;
-      flex: 1;
-      border: 1px solid #493744;
-      border-radius: 4px;
-      background: #302630;
-    }
-
-    .project-content {
-      padding: 21px;
-    }
-
-    .project-title-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-
-    h3 {
-      font-size: 16px;
-      line-height: 1.4;
-      font-weight: 650;
-    }
-
-    .project-arrow {
-      color: var(--accent);
-    }
-
-    .project-description {
-      margin: 10px 0 17px;
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .tag {
-      padding: 4px 9px;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    /* Skills */
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 13px;
-      margin-top: 30px;
-    }
-
-    .skill-card {
-      padding: 22px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-    }
-
-    .skill-card h3 {
-      margin-bottom: 14px;
-      font-size: 14px;
-    }
-
-    .skill-card
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio — Template</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #171519;
+  --surface: #201d22;
+  --raised: #28232a;
+  --text: #eee8ed;
+  --muted: #b2a5b2;
+  --line: #3b333d;
+  --accent: #c7a2bd;
+  --accent-soft: #392c38;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, sans-serif;
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--accent); }
+.shell { width: min(1080px, calc(100% - 40px)); margin: auto; }
+.nav {
+  height: 78px; display: flex; align-items: center;
+  justify-content: space-between; gap: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.wordmark { font-size: 13px; letter-spacing: .16em; font-weight: 800; }
+.wordmark span { color: var(--accent); }
+.navlinks { display: flex; gap: 24px; font-size: 13px; color: var(--muted); }
+.contact-link { border: 1px solid #5a4958; padding: 8px 13px; border-radius: 30px; }
+.hero { padding: 100px 0 75px; }
+.eyebrow, .kicker {
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: .17em; font-size: 11px; font-weight: 750;
+}
+h1 {
+  font-size: clamp(46px, 8vw, 90px); line-height: 1.02;
+  letter-spacing: -.06em; margin: 24px 0; max-width: 850px;
+}
+.soft { color: #b997b0; }
+.hero-copy { color: var(--muted); max-width: 550px; line-height: 1.9; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.btn {
+  display: inline-block; padding: 11px 17px;
+  border: 1px solid #5c4b5a; border-radius: 30px;
+  font-size: 13px; font-weight: 650;
+}
+.btn-primary { background: #e8d8e5; color: #2a2029; border-color: #e8d8e5; }
+.btn-primary:hover { background: var(--accent); color: #201820; }
+.hero-foot {
+  margin-top: 65px; padding-top: 18px;
+  border-top: 1px solid var(--line); color: var(--muted);
+  display: flex; justify-content: space-between; gap: 15px;
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+}
+main { background: var(--surface); }
+.section { padding: 75px 0; }
+.section-head {
+  display: flex; align-items: end; justify-content: space-between;
+  gap: 24px; margin-bottom: 30px;
+}
+h2 { margin: 0; font-size: clamp(29px, 4vw, 38px); letter-spacing: -.04em; line-height: 1.2; }
+.section-note { color: var(--muted); max-width: 320px; font-size: 13px; margin: 0; }
+.kicker { margin-bottom: 10px; font-size: 10px; }
+.about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 45px; }
+.about-copy { font-size: 16px; line-height: 1.9; margin: 0; }
+.details { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.detail {
+  background: var(--raised); border: 1px solid var(--line);
+  border-radius: 13px; padding: 15px;
+}
+.detail-label { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
+.detail-value { font-size: 13px; font-weight: 650; margin-top: 6px; }
+.projects, .experience { background: var(--raised); }
+.project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.project {
+  display: block; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 16px;
+  overflow: hidden; transition: transform .2s, border-color .2s;
+}
+.project:hover { transform: translateY(-4px); border-color: var(--accent); color: var(--text); }
+.project-visual {
+  height: 175px; background: var(--accent-soft);
+  display: grid; place-items: center; position: relative; padding: 20px;
+}
+.project-index { position: absolute; top: 15px; right: 16px; color: var(--muted); font-size: 10px; letter-spacing: .1em; }
+.window {
+  width: 82%; height: 100%; padding: 13px;
+  border: 1px solid #73586e; border-radius: 9px;
+  background: #28232a; transform: rotate(-2deg);
+}
+.window-top { display: flex; gap: 5px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.window-top i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.lines { display: grid; gap: 7px; padding-top: 13px; }
+.lines span { height: 5px; border-radius: 5px; background: #514452; }
+.lines span:first-child { width: 45%; background: var(--accent); }
+.lines span:nth-child(2) { width: 85%; }
+.lines span:nth-child(3) { width: 68%; }
+.blocks { display: flex; gap: 7px; margin-top: 12px; }
+.blocks i { height: 30px; flex: 1; border: 1px solid #514452; border-radius: 4px; }
+.project-body { padding: 21px; }
+.project-top { display: flex; justify-content: space-between; gap: 12px; }
+h3 { font-size: 17px; margin: 0; }
+.project-arrow { color: var(--accent); }
+.project p { color: var(--muted); font-size: 13px; line-height: 1.75; margin: 10px 0 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.tag { border: 1px solid var(--line); border-radius: 30px; padding: 3px 9px; color: var(--muted); font-size: 10px; }
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+.skill-group { padding: 22px; border: 1px solid var(--line); border-radius: 15px; background: var(--raised); }
+.skill-group h3 { margin-bottom: 13px; }
+.skill-group ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; color: var(--muted); font-size: 13px; }
+.skill-group li::before { content: "↳ "; color: var(--accent); }
+.timeline { border-top: 1px solid var(--line); }
+.timeline-item {
+  display: grid; grid-template-columns: 150px 1fr;
+  gap: 25px; padding: 24px 0; border-bottom: 1px solid var(--line);
+}
+.timeline-date { color: var(--muted); font-size: 12px; }
+.timeline-place { color: var(--accent); font-size: 12px; margin: 4px 0 8px; }
+.timeline-content p { color: var(--muted); font-size: 13px; margin: 0; max-width: 650px; }
+.contact { background: #493744; }
+.contact-inner { display: flex; justify-content: space-between; align-items: end; gap: 30px; }
+.contact h2 { font-size: clamp(34px, 5vw, 55px); max-width: 500px; }
+.contact p { color: #d1c2d0; max-width: 420px; font-size: 14px; }
+.contact .btn { background: #f0e3ee; color: #2a2029; border-color: #f0e3ee; }
+footer { padding: 23px 0; color: var(--muted); font-size: 11px; }
+.footer-inner { display: flex; justify-content: space-between; gap: 18px; }
+.footer-links { display: flex; gap: 17px; }
+@media (max-width: 700px) {
+  .navlinks { gap: 12px; font-size: 11px; }
+  .navlinks a:nth-child(2), .navlinks a:nth-child(3) { display: none; }
+  .hero { padding: 75px 0 60px; }
+  .hero-foot { flex-direction: column; }
+  .section { padding: 58px 0; }
+  .section-head, .contact-inner { align-items: start; flex-direction: column; }
+  .about-grid, .project-grid, .skills-grid { grid-template-columns: 1fr; }
+  .about-grid { gap: 24px; }
+  .timeline-item { grid-template-columns: 1fr; gap: 6px; }
+  .footer-inner { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="shell nav">
+    <a class="wordmark" href="#top">YOUR<span>.</span>NAME</a>
+    <nav class="navlinks" aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a class="contact-link" href="#contact">Contact ↗</a>
+    </nav>
+  </header>
+
+  <section class="shell hero" id="top">
+    <div class="eyebrow">Portfolio / 20XX</div>
+    <h1>Thoughtful work.<br><span class="soft">Built with intent.</span></h1>
+    <p class="hero-copy">A short introduction goes here. Describe your focus, what you like building, and the kind of problems you want to work on. Keep it direct and make it sound like you.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#projects">Explore projects ↘</a>
+      <a class="btn" href="#contact">Get in touch ↗</a>
+    </div>
+    <div class="hero-foot">
+      <span>Based in [City, Region]</span>
+      <span>✦ [Current status / availability]</span>
+    </div>
+  </section>
+
+  <main>
+    <section class="shell section" id="about">
+      <div class="section-head">
+        <div><div class="kicker">01 / Overview</div><h2>A little about me</h2></div>
+        <p class="section-note">A few clear details, without the full autobiography.</p>
+      </div>
+      <div class="about-grid">
+        <p class="about-copy">I’m <strong>[Your Name]</strong>, a [role / student / developer] interested in [areas you care about]. I enjoy working across [your focus areas] and turning complicated problems into things that are useful, reliable, and well considered. Outside of that, I’m usually [optional personal interest].</p>
+        <div class="details">
+          <div class="detail"><div class="detail-label">Focus</div><div class="detail-value">[Area of focus]</div></div>
+          <div class="detail"><div class="detail-label">Currently</div><div class="detail-value">[What you're doing]</div></div>
+          <div class="detail"><div class="detail-label">Education</div><div class="detail-value">[Degree / program]</div></div>
+          <div class="detail"><div class="detail-label">Elsewhere</div><div class="detail-value">[Links below]</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects" id="projects">
+      <div class="shell section">
+        <div class="section-head">
+          <div><div class="kicker">02 / Selected work</div><h2>Projects & experiments</h2></div>
+          <p class="section-note">Choose a few strong examples and link each card to its repository or write-up.</p>
+        </div>
+        <div class="project-grid">
+          <a class="project" href="https://github.com/" target="_blank" rel="noreferrer">
+            <div class="project-visual"><span class="project-index">PROJECT / 01</span><div class="window"><div class="window-top"><i></i><i></i><i></i></div><div class="lines"><span></span><span></span><span></span></div><div class="blocks"><i></i><i></i><i></i></div></div></div>
+            <div class="project-body"><div class="project-top"><h3>[Project name]</h3><span class="project-arrow">↗</span></div><p>Explain what it does, why you built it, and what your contribution was.</p><div class="tags"><span class="tag">[Technology]</span><span class="tag">[Category]</span><span class="tag">[Language]</span></div></div>
+          </a>
+          <a class="project" href="https://github.com/" target="_blank" rel="noreferrer">
+            <div class="project-visual"><span class="project-index">PROJECT / 02</span><div class="window" style="transform:rotate(2deg)"><div class="window-top"><i></i><i></i><i></i></div><div class="lines"><span style="width:58%"></span><span style="width:76%"></span><span style="width:60%"></span></div><div class="blocks"><i></i><i></i></div></div></div>
+            <div class="project-body"><div class="project-top"><h3>[Project name]</h3><span class="project-arrow">↗</span></div><p>Describe the problem, your approach, and one result or thing you learned.</p><div class="tags"><span class="tag">[Technology]</span><span class="tag">[Category]</span><span class="tag">[Language]</span></div></div>
+          </a>
+          <a class="project" href="https://github.com/" target="_blank" rel="noreferrer">
+            <div class="project-visual"><span class="project-index">PROJECT / 03</span><div class="window"><div class="window-top"><i></i><i></i><i></i></div><div class="lines"><span style="width:37%"></span><span style="width:91%"></span><span style="width:64%"></span></div><div class="blocks"><i></i><i></i><i></i></div></div></div>
+            <div class="project-body"><div class="project-top"><h3>[Project name]</h3><span class="project-arrow">↗</span></div><p>Use this space for research, an open-source contribution, or a personal build.</p><div class="tags"><span class="tag">[Technology]</span><span class="tag">[Category]</span></div></div>
+          </a>
+          <a class="project" href="https://github.com/" target="_blank" rel="noreferrer">
+            <div class="project-visual"><span class="project-index">PROJECT / 04</span><div class="window" style="transform:rotate(1deg)"><div class="window-top"><i></i><i></i><i></i></div><div class="lines"><span style="width:52%"></span><span style="width:80%"></span><span style="width:70%"></span></div><div class="blocks"><i></i><i></i></div></div></div>
+            <div class="project-body"><div class="project-top"><h3>[Project name]</h3><span class="project-arrow">↗</span></div><p>Keep the description specific and accessible to someone outside your specialty.</p><div class="tags"><span class="tag">[Technology]</span><span class="tag">[Category]</span></div></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell section" id="skills">
+      <div class="section-head">
+        <div><div class="kicker">03 / Toolkit</div><h2>Things I work with</h2></div>
+        <p class="section-note">Only list tools and skills you can comfortably talk about.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-group"><h3>[Development]</h3><ul><li>[Language or framework]</li><li>[Language or framework]</li><li>[Tools / workflow]</li></ul></div>
+        <div class="skill-group"><h3>[Research / technical]</h3><ul><li>[Method or specialty]</li><li>[Platform / tool]</li><li>[Method or specialty]</li></ul></div>
+        <div class="skill-group"><h3>[Other]</h3><ul><li>[Collaboration skill]</li><li>[Documentation / design]</li><li>[Additional area]</li></ul></div>
+      </div>
+    </section>
+
+    <section class="experience" id="experience">
+      <div class="shell section">
+        <div class="section-head">
+          <div><div class="kicker">04 / Background</div><h2>Experience & education</h2></div>
+          <p class="section-note">A compact timeline is enough. A résumé can hold the rest.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-date">[20XX — Present]</div><div class="timeline-content"><h3>[Role or degree]</h3><div class="timeline-place">[Organization / Institution]</div><p>Summarize your work, responsibilities, or research in one or two concise sentences.</p></div></div>
+          <div class="timeline-item"><div class="timeline-date">[20XX — 20XX]</div><div class="timeline-content"><h3>[Previous role or degree]</h3><div class="timeline-place">[Organization / Institution]</div><p>Describe a relevant contribution, project, or area of study without repeating your résumé.</p></div></div>
+          <div class="timeline-item"><div class="timeline-date">[20XX — 20XX]</div><div class="timeline-content"><h3>[Research / volunteer / other]</h3><div class="timeline-place">[Group / Organization]</div><p>Add another entry if it contributes something distinct. Delete this row if you do not need it.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="shell section contact-inner">
+        <div><div class="kicker">05 / Contact</div><h2>Have something in mind?</h2><p>Invite people to reach out about roles, collaborations, or interesting projects.</p></div>
+        <a class="btn" href="mailto:your.email@example.com">your.email@example.com ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <span>© <span id="year">20XX</span> [Your Name]. Built with care.</span>
+      <div class="footer-links"><a href="https://github.com/" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="#top">Back to top ↑</a></div>
+    </div>
+  </footer>
+</div>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
